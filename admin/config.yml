@@ -20,8 +20,8 @@ public_folder: "/assets/uploads"
 # a "draft -> review -> publish" workflow instead.
 publish_mode: simple
 
-site_url: https://YOUR-SITE.netlify.app
-display_url: https://YOUR-SITE.netlify.app
+site_url: https://leifs.netlify.app
+display_url: https://leifs.netlify.app
 
 collections:
   # ---------- PROJECTS ----------
