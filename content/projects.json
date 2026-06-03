@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "title": "Terra — Personal Finance Dashboard",
+      "tag": "Web App",
+      "description": "A calm, focused dashboard for tracking spending and savings goals. Built with an emphasis on clarity and gentle, earthy visual design.",
+      "url": "",
+      "link_text": "View project"
+    },
+    {
+      "title": "Fieldnotes",
+      "tag": "Mobile",
+      "description": "A note-taking app for people who think outdoors. Offline-first, fast capture, and a tactile reading experience.",
+      "url": "",
+      "link_text": "View project"
+    },
+    {
+      "title": "Open Trail Map",
+      "tag": "Open Source",
+      "description": "A community-maintained map of hiking trails with crowd-sourced conditions and photos. Contributed mapping and design.",
+      "url": "",
+      "link_text": "View project"
+    },
+    {
+      "title": "Clay & Co. Brand System",
+      "tag": "Design",
+      "description": "A full visual identity for a ceramics studio — logo, type system, packaging, and a small storefront site.",
+      "url": "",
+      "link_text": "View project"
+    },
+    {
+      "title": "Harvest CLI",
+      "tag": "Tooling",
+      "description": "A command-line tool that automates repetitive build tasks for small teams. Lightweight, scriptable, well-documented.",
+      "url": "",
+      "link_text": "View project"
+    },
+    {
+      "title": "Quiet Hours",
+      "tag": "Experiment",
+      "description": "A generative ambient-sound web toy that builds evolving soundscapes from earthy field recordings.",
+      "url": "",
+      "link_text": "View project"
+    }
+  ]
+}

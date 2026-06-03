@@ -1,0 +1,83 @@
+# ============================================================
+#  Decap CMS configuration
+#  This tells the admin panel WHAT you can edit and WHERE it
+#  saves. You should not need to change this often.
+#
+#  backend: git-gateway + Netlify Identity means:
+#    - Only people you INVITE in Netlify can log in.
+#    - Edits are saved straight back to your site's files.
+# ============================================================
+
+backend:
+  name: git-gateway
+  branch: main          # the branch your site is published from
+
+# While editing, media uploads go here (create the folder if you add images)
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# Saves changes immediately (simplest). Set to true if you'd prefer
+# a "draft -> review -> publish" workflow instead.
+publish_mode: simple
+
+site_url: https://YOUR-SITE.netlify.app
+display_url: https://YOUR-SITE.netlify.app
+
+collections:
+  # ---------- PROJECTS ----------
+  - name: "projects"
+    label: "Projects"
+    files:
+      - name: "projects"
+        label: "Projects list"
+        file: "content/projects.json"
+        description: "The projects shown on your Projects page and homepage."
+        fields:
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Tag (e.g. Web App, Design)", name: "tag", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link URL", name: "url", widget: "string", required: false }
+              - { label: "Link text", name: "link_text", widget: "string", required: false, default: "View project" }
+
+  # ---------- EXPERIENCE ----------
+  - name: "experience"
+    label: "Experience"
+    files:
+      - name: "experience"
+        label: "Experience timeline"
+        file: "content/experience.json"
+        description: "The roles shown on your Experience page."
+        fields:
+          - label: "Roles"
+            name: "roles"
+            widget: "list"
+            fields:
+              - { label: "Period (e.g. 2023 — Present)", name: "period", widget: "string" }
+              - { label: "Role / Title", name: "role", widget: "string" }
+              - { label: "Organization", name: "org", widget: "string" }
+              - { label: "Summary", name: "summary", widget: "text" }
+
+  # ---------- BLOG ----------
+  - name: "blog"
+    label: "Blog"
+    files:
+      - name: "blog"
+        label: "Blog posts"
+        file: "content/blog.json"
+        description: "Your blog posts. The newest (by date) shows first."
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "URL slug (lowercase, no spaces)", name: "slug", widget: "string", hint: "e.g. my-first-post" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "Author", name: "author", widget: "string", required: false, default: "Your Name" }
+              - { label: "Short excerpt", name: "excerpt", widget: "text", hint: "One line shown in the list." }
+              - { label: "Body", name: "body", widget: "text", hint: "Supports simple Markdown: ## heading, **bold**, *italic*, - lists, > quotes, [link](url)." }

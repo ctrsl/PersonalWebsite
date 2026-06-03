@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "slug": "welcome",
+      "title": "Welcome to my corner of the web",
+      "date": "2026-05-20",
+      "author": "You",
+      "excerpt": "Why I built this site, and what you can expect to find here.",
+      "body": "I wanted a quiet place on the internet that felt like *mine* — somewhere to share work, write down what I'm learning, and keep a record of where I've been.\n\n## Why a personal site\n\nSocial platforms come and go, and they shape what you make. A site you own is different. It can be slow, considered, and strange in exactly the ways you want.\n\n## What you'll find here\n\n- **Projects** — things I've designed and built\n- **Experience** — the road that got me here\n- **Blog** — notes, essays, and the occasional rabbit hole\n\n> Make the thing you wish existed.\n\nThanks for stopping by. More soon."
+    },
+    {
+      "slug": "designing-with-restraint",
+      "title": "Designing with restraint",
+      "date": "2026-04-08",
+      "author": "You",
+      "excerpt": "A few principles I keep coming back to when a design feels noisy.",
+      "body": "Every project reaches a point where it feels *too busy*. Here's how I find my way back to calm.\n\n## Remove before you add\n\nThe fastest way to improve most screens is to take something away. Whitespace is not wasted space — it's where the eye rests.\n\n## Limit your palette\n\nA small set of earthy, related tones will almost always feel more intentional than a rainbow. Constraints breed coherence.\n\n## Let type do the work\n\nGood typography carries a design further than any decoration. Get the rhythm right and you need very little else."
+    },
+    {
+      "slug": "tools-i-reach-for",
+      "title": "The tools I reach for in 2026",
+      "date": "2026-02-15",
+      "author": "You",
+      "excerpt": "A short, honest list of the software that earns a place in my day.",
+      "body": "I try to keep my toolkit small. These are the ones that have stuck around.\n\n- **A plain text editor** for writing and code\n- **A vector tool** for design work\n- **A notebook** — the paper kind — for thinking\n\nThe best tool is usually the one that gets out of your way."
+    }
+  ]
+}

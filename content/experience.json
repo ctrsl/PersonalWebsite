@@ -1,0 +1,28 @@
+{
+  "roles": [
+    {
+      "period": "2023 — Present",
+      "role": "Senior Product Designer",
+      "org": "Northwind Studio",
+      "summary": "Lead designer on a suite of productivity tools. Own the design system, mentor two junior designers, and partner closely with engineering to ship calm, considered interfaces."
+    },
+    {
+      "period": "2020 — 2023",
+      "role": "Product Designer",
+      "org": "Foundry Labs",
+      "summary": "Designed and prototyped features across web and mobile for a fast-growing startup. Ran user research and helped establish the company's first design guidelines."
+    },
+    {
+      "period": "2018 — 2020",
+      "role": "UX / UI Designer",
+      "org": "Cedar Agency",
+      "summary": "Crafted brand and product experiences for a range of clients, from early-stage startups to established nonprofits. Shipped a dozen sites and apps end to end."
+    },
+    {
+      "period": "2016 — 2018",
+      "role": "Junior Designer",
+      "org": "Freelance",
+      "summary": "Took on independent projects in branding and web design while finishing my studies — learning the craft one client at a time."
+    }
+  ]
+}
