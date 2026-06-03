@@ -44,6 +44,7 @@
   }
 
   const ARROW = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  const SPOTIFY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.59 14.43a.62.62 0 01-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 11-.28-1.21c3.8-.87 7.07-.5 9.71 1.12.3.18.39.57.22.84zm1.23-2.73a.78.78 0 01-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 11-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.36.22.48.7.25 1.07zm.11-2.85C14.84 8.98 9.5 8.8 6.4 9.74a.94.94 0 11-.54-1.8c3.56-1.08 9.46-.87 13.18 1.34a.94.94 0 01-.98 1.6z"/></svg>';
 
   async function load(path) {
     const res = await fetch(path, { cache: "no-store" });
@@ -62,6 +63,9 @@
 
   function renderProjects(el, data) {
     const items = (data.projects || []);
+    // keep the About "projects" stat in sync with the real number
+    const countEl = document.querySelector("[data-project-count]");
+    if (countEl) countEl.textContent = items.length;
     if (!items.length) { el.innerHTML = '<p class="skeleton">No projects yet.</p>'; return; }
     el.innerHTML = items.map(function (p, i) {
       const link = p.url
@@ -156,25 +160,36 @@
     document.body.classList.remove("modal-open");
   }
 
-  /* ---------- Media / Instagram ---------- */
+  /* ---------- Media / Instagram (3 most recent, with metrics) ---------- */
+  const HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>';
+  const CHAT  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 9 9 0 01-4-1L3 20l1-4.5a8.4 8.4 0 01-1-4A8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z"/></svg>';
+
   function renderMedia(el, data) {
     // If you paste a live widget embed (e.g. LightWidget/SnapWidget iframe) into
-    // the admin "embed code" field, we show that instead of the managed grid.
+    // the admin "embed code" field, we show that instead of the managed cards.
     if (data.embed_code && data.embed_code.trim()) {
       el.innerHTML = data.embed_code;
     } else {
-      const posts = (data.posts || []);
-      const grid = posts.length
-        ? '<div class="media-grid">' + posts.map(function (m) {
+      const posts = (data.posts || []).slice(0, 3); // 3 most recent (newest first)
+      el.innerHTML = posts.length
+        ? '<div class="grid grid--3">' + posts.map(function (m, i) {
             const tag = m.url ? "a" : "div";
             const href = m.url ? ' href="' + esc(m.url) + '" target="_blank" rel="noopener"' : "";
-            return "<" + tag + ' class="media-tile"' + href + ">" +
-                     '<img src="' + esc(m.image) + '" alt="" loading="lazy">' +
-                     (m.caption ? '<span class="media-tile__cap">' + esc(m.caption) + "</span>" : "") +
+            const metrics = (m.likes != null || m.comments != null)
+              ? '<div class="ig-metrics">' +
+                  (m.likes != null ? "<span>" + HEART + esc(m.likes) + "</span>" : "") +
+                  (m.comments != null ? "<span>" + CHAT + esc(m.comments) + "</span>" : "") +
+                "</div>"
+              : "";
+            return "<" + tag + ' class="ig-card reveal" data-delay="' + (i + 1) + '"' + href + ">" +
+                     '<span class="ig-card__media"><img src="' + esc(m.image) + '" alt="" loading="lazy"></span>' +
+                     '<div class="ig-card__body">' +
+                       '<p class="ig-card__desc">' + esc(m.description || m.caption || "") + "</p>" +
+                       metrics +
+                     "</div>" +
                    "</" + tag + ">";
           }).join("") + "</div>"
         : '<p class="skeleton">No photos yet.</p>';
-      el.innerHTML = grid;
     }
     if (data.instagram_url) {
       el.insertAdjacentHTML("beforeend",
@@ -206,19 +221,41 @@
   }
 
   function renderSpotify(el, data) {
-    const e = spotifyEmbed(data.spotify_link);
-    if (!e.src) { el.innerHTML = '<p class="skeleton">Add a Spotify share link in the admin panel.</p>'; return; }
-    el.innerHTML = '<div class="spotify-wrap"><iframe src="' + esc(e.src) +
-      '" height="' + e.height + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify player"></iframe></div>';
+    const link = (data.spotify_link || "").trim();
+    // A playlist/album/artist/track/podcast link CAN be embedded as a player.
+    if (/\/(playlist|album|artist|track|episode|show)\//.test(link)) {
+      const e = spotifyEmbed(link);
+      el.innerHTML = '<div class="spotify-wrap"><iframe src="' + esc(e.src) +
+        '" height="' + e.height + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify player"></iframe></div>';
+      return;
+    }
+    // A profile link can't be embedded by Spotify, so we show a link card instead.
+    if (!link) { el.innerHTML = '<p class="skeleton">Add your Spotify profile link in the admin panel.</p>'; return; }
+    el.innerHTML =
+      '<div class="social-card reveal">' +
+        '<div class="social-card__icon">' + SPOTIFY + "</div>" +
+        '<div class="social-card__text"><strong>My Spotify profile</strong><p>Follow along with what I’m playing.</p></div>' +
+        '<a class="btn btn--primary" href="' + esc(link) + '" target="_blank" rel="noopener">Open Spotify <span class="btn__arrow">→</span></a>' +
+      "</div>";
+    reobserve(el);
+  }
+
+  /* ---------- About portrait ---------- */
+  function renderAboutMedia(el, data) {
+    if (data.portrait) {
+      el.innerHTML = '<img src="' + esc(data.portrait) + '" alt="Leif R">';
+    } else {
+      el.innerHTML = '<div class="initials">' + esc(data.initials || "LR") + "</div>";
+    }
   }
 
   /* ---------- LinkedIn callout ---------- */
   function renderLinkedIn(el, data) {
     if (!data.linkedin_url) { el.innerHTML = ""; return; }
     el.innerHTML =
-      '<div class="linkedin-card reveal">' +
-        '<div class="linkedin-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.5v-7H6v7h2.34zM7.17 9.43a1.36 1.36 0 100-2.72 1.36 1.36 0 000 2.72zM18 17.5v-3.85c0-2.06-1.1-3.02-2.57-3.02-1.18 0-1.71.65-2 1.11v-.95H11.1v7h2.33v-3.9c0-.25.02-.5.09-.68.2-.5.65-1.02 1.42-1.02 1 0 1.4.76 1.4 1.88v3.72H18z"/></svg></div>' +
-        '<div class="linkedin-card__text"><strong>Also on LinkedIn</strong>' +
+      '<div class="social-card reveal">' +
+        '<div class="social-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.5v-7H6v7h2.34zM7.17 9.43a1.36 1.36 0 100-2.72 1.36 1.36 0 000 2.72zM18 17.5v-3.85c0-2.06-1.1-3.02-2.57-3.02-1.18 0-1.71.65-2 1.11v-.95H11.1v7h2.33v-3.9c0-.25.02-.5.09-.68.2-.5.65-1.02 1.42-1.02 1 0 1.4.76 1.4 1.88v3.72H18z"/></svg></div>' +
+        '<div class="social-card__text"><strong>Also on LinkedIn</strong>' +
           (data.blurb ? "<p>" + esc(data.blurb) + "</p>" : "") +
         "</div>" +
         '<a class="btn btn--ghost" href="' + esc(data.linkedin_url) + '" target="_blank" rel="noopener">Connect <span class="btn__arrow">→</span></a>' +
@@ -247,6 +284,7 @@
     "experience": { file: "content/experience.json", fn: renderExperience },
     "blog":       { file: "content/blog.json",       fn: renderBlog },
     "linkedin":   { file: "content/linkedin.json",   fn: renderLinkedIn },
+    "about-media":{ file: "content/about.json",      fn: renderAboutMedia },
     "media":      { file: "content/media.json",      fn: renderMedia },
     "music-head": { file: "content/spotify.json",    fn: renderSpotifyHead },
     "music":      { file: "content/spotify.json",    fn: renderSpotify }

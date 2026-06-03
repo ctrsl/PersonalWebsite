@@ -108,27 +108,36 @@ Quick personalizations (search-and-replace in the files):
 All three are editable from your admin panel. Here's how each one works and
 what's realistic for a site like this:
 
-### 🎵 Spotify (Music section) — fully automatic ✓
-Spotify officially supports embedding.
-1. In Spotify, open any playlist, album, or track.
-2. Click the **•••** menu → **Share → Copy link**.
-3. In the admin panel go to **Music (Spotify)**, paste it into **Spotify share
+### 🎵 Spotify (Music section) — links to your profile
+The Music section shows an **"Open Spotify"** card linking to your profile.
+(Spotify only lets websites *embed* playlists/albums/artists — **not** a personal
+profile — so a profile shows as a link card.)
+
+1. In the Spotify app, go to your profile → **•••** → **Share → Copy link**.
+2. In the admin panel go to **Music (Spotify)**, paste it into **Spotify profile
    link**, and publish.
 
-The player updates itself — if you add songs to that playlist in Spotify, the
-site reflects them automatically.
+💡 Bonus: if you ever paste a **playlist/album/artist** link instead of your
+profile, the site automatically embeds a live, playable player there.
 
-### 📷 Instagram (Media section) — two ways
-Instagram closed the simple feed API, so you have two honest options:
+### 📷 Instagram (Media section) — 3 recent posts with metrics
+The Media section shows your **3 most recent posts** with a description and
+like/comment counts.
 
-- **Managed grid (default, always works):** In the admin panel go to
-  **Media (Instagram)**, upload your photos, add captions/links, and publish.
-  You control exactly what shows. (This is what's set up now.)
-- **Live auto-updating feed (optional):** Sign up for a free widget service
-  such as **LightWidget** (<https://lightwidget.com>) or **SnapWidget**, connect
-  your Instagram, copy the `<iframe>` embed code they give you, and paste it into
-  the **Live widget embed code** field in the admin panel. When that field has
-  something in it, the site shows the live feed instead of the grid.
+⚠️ Honest heads-up: Instagram does **not** allow a website to auto-pull your
+posts and their like/comment numbers from "just a handle" anymore — that needs a
+business account + authenticated API, and handle-scraping breaks constantly. So
+this is set up as a **manual showcase you control** from the admin panel:
+
+- In the admin panel go to **Media (Instagram)**. Add up to a few posts (only the
+  **top 3** show — put the newest first): upload the photo, write a description,
+  and type in the likes/comments numbers. Set **Your Instagram URL** for the
+  "Follow" button.
+- **Optional live feed:** if you'd rather it auto-update, sign up for a free
+  widget service like **LightWidget** (<https://lightwidget.com>), copy the
+  `<iframe>` it gives you, and paste it into the **Live widget embed code** field.
+  (Note: those free widgets usually show recent photos but *not* like/comment
+  counts.)
 
 ### 💼 LinkedIn — why it's a link, not an auto-feed
 Unlike Spotify, **LinkedIn does not let websites pull your posts automatically**
@@ -139,6 +148,41 @@ entry in the admin panel (takes ~30 seconds) — that's the reliable way to
 "reflect" it here.
 
 Set your profile URL in the admin panel under **LinkedIn**.
+
+---
+
+## 7. The About photo
+
+The About section shows an **"LR" monogram** by default. To use a real photo:
+
+1. In the admin panel, open the **About** collection.
+2. Click **Portrait photo → Choose an image**, upload your photo, and publish.
+
+The photo replaces the monogram automatically. (Leave it blank any time to go
+back to the monogram.) A roughly square or portrait photo looks best.
+
+---
+
+## 8. The contact form — where messages go
+
+The **"Have something in mind?"** section is a real contact form (name, email,
+subject, message). It uses **Netlify Forms**, which captures submissions for you
+automatically — no code, no inbox setup required.
+
+**To read the messages people send you:**
+1. Go to your site in the **Netlify dashboard**.
+2. Open the **Forms** tab → click the **contact** form.
+3. Every submission is listed there for you to review.
+
+**To also get an email when someone writes in (recommended):**
+- In the Netlify dashboard: **Forms → Settings & notifications → Add notification
+  → Email notification**, and enter your email.
+
+Notes:
+- The form only works on the **live Netlify site** — it won't send from your
+  computer's local preview (you'll see a friendly note if you try).
+- Netlify includes free spam filtering; the form has a hidden honeypot field to
+  catch bots.
 
 ---
 

@@ -123,4 +123,31 @@
   /* ---------- 10. Footer year ---------- */
   const yr = document.querySelector("[data-year]");
   if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---------- 11. Contact form (Netlify Forms) ---------- */
+  const form = document.querySelector("form[data-contact]");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const status = form.querySelector("[data-form-status]");
+      const setStatus = function (cls, msg) {
+        if (status) { status.className = "form-status " + cls; status.textContent = msg; }
+      };
+      setStatus("", "Sending…");
+      const body = new URLSearchParams(new FormData(form)).toString();
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("submit failed");
+          form.reset();
+          setStatus("ok", "Thanks! Your message has been sent — I’ll be in touch.");
+        })
+        .catch(function () {
+          setStatus("err", "Heads up: the form only sends once the site is live on Netlify.");
+        });
+    });
+  }
 })();

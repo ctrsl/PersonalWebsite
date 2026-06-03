@@ -2,13 +2,8 @@
   "instagram_url": "https://instagram.com/yourhandle",
   "embed_code": "",
   "posts": [
-    { "image": "https://picsum.photos/seed/leaf1/600/600", "caption": "Morning light in the studio", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf2/600/600", "caption": "Field notes & coffee", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf3/600/600", "caption": "A new project takes shape", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf4/600/600", "caption": "Trail day", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf5/600/600", "caption": "Ceramics in progress", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf6/600/600", "caption": "Golden hour", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf7/600/600", "caption": "Workspace reset", "url": "https://instagram.com/yourhandle" },
-    { "image": "https://picsum.photos/seed/leaf8/600/600", "caption": "Sketchbook spread", "url": "https://instagram.com/yourhandle" }
+    { "image": "https://picsum.photos/seed/leaf1/600/600", "description": "Morning light in the studio — a fresh project takes shape.", "likes": 128, "comments": 14, "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf2/600/600", "description": "Field notes and coffee before a big build day.", "likes": 96, "comments": 8, "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf3/600/600", "description": "Golden hour on the trail. Best ideas always arrive out here.", "likes": 211, "comments": 23, "url": "https://instagram.com/yourhandle" }
   ]
 }

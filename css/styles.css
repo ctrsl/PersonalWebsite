@@ -279,7 +279,7 @@ p { color: var(--text-mut); }
   display: inline-block; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--sage); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; margin-bottom: 16px;
 }
-.card h3 { margin-bottom: 10px; }
+.card h3 { margin-bottom: 10px; color: var(--text); }
 .card p { font-size: 0.96rem; }
 .card__link {
   margin-top: 18px; display: inline-flex; align-items: center; gap: 8px;
@@ -416,23 +416,61 @@ p { color: var(--text-mut); }
 body.modal-open { overflow: hidden; }
 
 /* ============================================================
-   LINKEDIN callout (inside the Blog section)
+   SOCIAL callout card (LinkedIn, Spotify, …)
    ============================================================ */
-.linkedin-card {
+.social-card {
   display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 24px 28px; margin-top: 40px;
   transition: transform 0.45s var(--bounce), border-color 0.4s var(--ease);
 }
-.linkedin-card:hover { transform: translateY(-4px); border-color: rgba(140,194,106,0.5); }
-.linkedin-card__icon {
+.social-card:hover { transform: translateY(-4px); border-color: rgba(140,194,106,0.5); }
+.social-card__icon {
   flex: none; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center;
   background: rgba(140,194,106,0.14); color: var(--leaf);
 }
-.linkedin-card__icon svg { width: 26px; height: 26px; }
-.linkedin-card__text { flex: 1 1 280px; }
-.linkedin-card__text strong { color: var(--text); font-size: 1.05rem; }
-.linkedin-card__text p { font-size: 0.92rem; margin-top: 2px; }
+.social-card__icon svg { width: 26px; height: 26px; }
+.social-card__text { flex: 1 1 280px; }
+.social-card__text strong { color: var(--text); font-size: 1.05rem; }
+.social-card__text p { font-size: 0.92rem; margin-top: 2px; }
+
+/* ============================================================
+   INSTAGRAM post cards (3 recent, with metrics)
+   ============================================================ */
+.ig-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; display: block;
+  transition: transform 0.45s var(--bounce), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.ig-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(140,194,106,0.5); box-shadow: 0 34px 64px -32px rgba(0,0,0,0.85); }
+.ig-card__media { display: block; aspect-ratio: 1; overflow: hidden; }
+.ig-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+.ig-card:hover .ig-card__media img { transform: scale(1.08); }
+.ig-card__body { padding: 18px 20px 20px; }
+.ig-card__desc { font-size: 0.92rem; color: var(--text-mut); }
+.ig-metrics { display: flex; gap: 20px; margin-top: 14px; color: var(--text-dim); font-size: 0.85rem; }
+.ig-metrics span { display: inline-flex; align-items: center; gap: 6px; }
+.ig-metrics svg { width: 16px; height: 16px; }
+
+/* ============================================================
+   CONTACT FORM (Netlify Forms)
+   ============================================================ */
+.contact-form { max-width: 560px; margin: 0 auto; display: grid; gap: 14px; text-align: left; }
+.contact-form input, .contact-form textarea {
+  width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px 16px; color: var(--text); font-family: var(--sans); font-size: 1rem;
+  transition: border-color 0.3s var(--ease);
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--leaf); }
+.contact-form textarea { resize: vertical; min-height: 130px; }
+.contact-form .btn { justify-self: center; margin-top: 6px; }
+.contact-form ::placeholder { color: var(--text-dim); }
+.form-status { text-align: center; font-size: 0.92rem; min-height: 1.2em; margin-top: 4px; }
+.form-status.ok { color: var(--leaf); }
+.form-status.err { color: var(--gold); }
+
+/* About portrait image (overrides the placeholder initials) */
+.about__media img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ============================================================
    MEDIA / INSTAGRAM grid

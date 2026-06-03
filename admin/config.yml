@@ -24,6 +24,18 @@ site_url: https://leifs.netlify.app
 display_url: https://leifs.netlify.app
 
 collections:
+  # ---------- ABOUT ----------
+  - name: "about"
+    label: "About"
+    files:
+      - name: "about"
+        label: "About section"
+        file: "content/about.json"
+        description: "The photo (or initials) shown in your About section."
+        fields:
+          - { label: "Portrait photo", name: "portrait", widget: "image", required: false, hint: "Upload a photo to replace the 'LR' monogram. Leave blank to keep the monogram." }
+          - { label: "Initials (shown if no photo)", name: "initials", widget: "string", required: false, default: "LR" }
+
   # ---------- PROJECTS ----------
   - name: "projects"
     label: "Projects"
@@ -78,7 +90,7 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "URL slug (lowercase, no spaces)", name: "slug", widget: "string", hint: "e.g. my-first-post" }
               - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-              - { label: "Author", name: "author", widget: "string", required: false, default: "Your Name" }
+              - { label: "Author", name: "author", widget: "string", required: false, default: "Leif R" }
               - { label: "Short excerpt", name: "excerpt", widget: "text", hint: "One line shown in the list." }
               - { label: "Body", name: "body", widget: "text", hint: "Supports simple Markdown: ## heading, **bold**, *italic*, - lists, > quotes, [link](url)." }
 
@@ -101,21 +113,23 @@ collections:
       - name: "media"
         label: "Instagram media"
         file: "content/media.json"
-        description: "The photo grid in the Media section."
+        description: "The 3 most recent posts shown in the Media section (newest first)."
         fields:
-          - { label: "Your Instagram URL", name: "instagram_url", widget: "string" }
+          - { label: "Your Instagram URL", name: "instagram_url", widget: "string", hint: "Used for the 'Follow on Instagram' button." }
           - label: "Live widget embed code (optional)"
             name: "embed_code"
             widget: "text"
             required: false
-            hint: "Optional. Paste an embed iframe from a service like LightWidget or SnapWidget to show a LIVE feed. Leave blank to use the photo grid below."
-          - label: "Photos"
+            hint: "Optional. Paste an embed iframe from a service like LightWidget or SnapWidget to show a LIVE feed. Leave blank to use the 3 posts below."
+          - label: "Recent posts (only the top 3 show — put newest first)"
             name: "posts"
             widget: "list"
             fields:
               - { label: "Photo", name: "image", widget: "image" }
-              - { label: "Caption", name: "caption", widget: "string", required: false }
-              - { label: "Link (e.g. the Instagram post)", name: "url", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Likes", name: "likes", widget: "number", required: false, value_type: "int" }
+              - { label: "Comments", name: "comments", widget: "number", required: false, value_type: "int" }
+              - { label: "Link to the post", name: "url", widget: "string", required: false }
 
   # ---------- MUSIC / SPOTIFY ----------
   - name: "spotify"
@@ -128,7 +142,7 @@ collections:
         fields:
           - { label: "Heading", name: "heading", widget: "string" }
           - { label: "Blurb", name: "blurb", widget: "string", required: false }
-          - label: "Spotify share link"
+          - label: "Spotify profile link"
             name: "spotify_link"
             widget: "string"
-            hint: "In Spotify, open a playlist/album/track → ... menu → Share → Copy link, and paste it here."
+            hint: "Your Spotify profile: open the Spotify app → your profile → ... → Share → Copy link. (Tip: if you paste a PLAYLIST/album/artist link instead, it embeds a player.)"
