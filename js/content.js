@@ -156,6 +156,76 @@
     document.body.classList.remove("modal-open");
   }
 
+  /* ---------- Media / Instagram ---------- */
+  function renderMedia(el, data) {
+    // If you paste a live widget embed (e.g. LightWidget/SnapWidget iframe) into
+    // the admin "embed code" field, we show that instead of the managed grid.
+    if (data.embed_code && data.embed_code.trim()) {
+      el.innerHTML = data.embed_code;
+    } else {
+      const posts = (data.posts || []);
+      const grid = posts.length
+        ? '<div class="media-grid">' + posts.map(function (m) {
+            const tag = m.url ? "a" : "div";
+            const href = m.url ? ' href="' + esc(m.url) + '" target="_blank" rel="noopener"' : "";
+            return "<" + tag + ' class="media-tile"' + href + ">" +
+                     '<img src="' + esc(m.image) + '" alt="" loading="lazy">' +
+                     (m.caption ? '<span class="media-tile__cap">' + esc(m.caption) + "</span>" : "") +
+                   "</" + tag + ">";
+          }).join("") + "</div>"
+        : '<p class="skeleton">No photos yet.</p>';
+      el.innerHTML = grid;
+    }
+    if (data.instagram_url) {
+      el.insertAdjacentHTML("beforeend",
+        '<div class="section-foot reveal"><a class="btn btn--primary" href="' + esc(data.instagram_url) +
+        '" target="_blank" rel="noopener">Follow on Instagram <span class="btn__arrow">→</span></a></div>');
+    }
+    reobserve(el);
+  }
+
+  /* ---------- Spotify ---------- */
+  // Turns a normal Spotify share link into its embeddable form.
+  function spotifyEmbed(link) {
+    if (!link) return { src: "", height: 352 };
+    try {
+      const u = new URL(link.trim());
+      if (u.hostname.indexOf("spotify.com") === -1) return { src: "", height: 352 };
+      let path = u.pathname;
+      if (path.indexOf("/embed/") !== 0) path = "/embed" + path;
+      const small = /\/(track|episode)\//.test(path);
+      return { src: "https://open.spotify.com" + path, height: small ? 152 : 352 };
+    } catch (e) { return { src: "", height: 352 }; }
+  }
+
+  function renderSpotifyHead(el, data) {
+    el.innerHTML =
+      '<p class="eyebrow">Music</p>' +
+      "<h2>" + esc(data.heading || "What I'm listening to") + "</h2>" +
+      (data.blurb ? '<p class="lead">' + esc(data.blurb) + "</p>" : "");
+  }
+
+  function renderSpotify(el, data) {
+    const e = spotifyEmbed(data.spotify_link);
+    if (!e.src) { el.innerHTML = '<p class="skeleton">Add a Spotify share link in the admin panel.</p>'; return; }
+    el.innerHTML = '<div class="spotify-wrap"><iframe src="' + esc(e.src) +
+      '" height="' + e.height + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify player"></iframe></div>';
+  }
+
+  /* ---------- LinkedIn callout ---------- */
+  function renderLinkedIn(el, data) {
+    if (!data.linkedin_url) { el.innerHTML = ""; return; }
+    el.innerHTML =
+      '<div class="linkedin-card reveal">' +
+        '<div class="linkedin-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.5v-7H6v7h2.34zM7.17 9.43a1.36 1.36 0 100-2.72 1.36 1.36 0 000 2.72zM18 17.5v-3.85c0-2.06-1.1-3.02-2.57-3.02-1.18 0-1.71.65-2 1.11v-.95H11.1v7h2.33v-3.9c0-.25.02-.5.09-.68.2-.5.65-1.02 1.42-1.02 1 0 1.4.76 1.4 1.88v3.72H18z"/></svg></div>' +
+        '<div class="linkedin-card__text"><strong>Also on LinkedIn</strong>' +
+          (data.blurb ? "<p>" + esc(data.blurb) + "</p>" : "") +
+        "</div>" +
+        '<a class="btn btn--ghost" href="' + esc(data.linkedin_url) + '" target="_blank" rel="noopener">Connect <span class="btn__arrow">→</span></a>' +
+      "</div>";
+    reobserve(el);
+  }
+
   // re-run reveal observer for freshly injected nodes
   function reobserve(scope) {
     const reveals = scope.querySelectorAll(".reveal");
@@ -175,7 +245,11 @@
   const map = {
     "projects":   { file: "content/projects.json",   fn: renderProjects },
     "experience": { file: "content/experience.json", fn: renderExperience },
-    "blog":       { file: "content/blog.json",       fn: renderBlog }
+    "blog":       { file: "content/blog.json",       fn: renderBlog },
+    "linkedin":   { file: "content/linkedin.json",   fn: renderLinkedIn },
+    "media":      { file: "content/media.json",      fn: renderMedia },
+    "music-head": { file: "content/spotify.json",    fn: renderSpotifyHead },
+    "music":      { file: "content/spotify.json",    fn: renderSpotify }
   };
 
   document.querySelectorAll("[data-render]").forEach(function (el) {

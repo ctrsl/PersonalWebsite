@@ -101,4 +101,45 @@ Quick personalizations (search-and-replace in the files):
 - **Starter content:** the Projects, Experience, and Blog entries are samples —
   replace them through the admin editor.
 
+---
+
+## 6. The social sections (Instagram, Spotify, LinkedIn)
+
+All three are editable from your admin panel. Here's how each one works and
+what's realistic for a site like this:
+
+### 🎵 Spotify (Music section) — fully automatic ✓
+Spotify officially supports embedding.
+1. In Spotify, open any playlist, album, or track.
+2. Click the **•••** menu → **Share → Copy link**.
+3. In the admin panel go to **Music (Spotify)**, paste it into **Spotify share
+   link**, and publish.
+
+The player updates itself — if you add songs to that playlist in Spotify, the
+site reflects them automatically.
+
+### 📷 Instagram (Media section) — two ways
+Instagram closed the simple feed API, so you have two honest options:
+
+- **Managed grid (default, always works):** In the admin panel go to
+  **Media (Instagram)**, upload your photos, add captions/links, and publish.
+  You control exactly what shows. (This is what's set up now.)
+- **Live auto-updating feed (optional):** Sign up for a free widget service
+  such as **LightWidget** (<https://lightwidget.com>) or **SnapWidget**, connect
+  your Instagram, copy the `<iframe>` embed code they give you, and paste it into
+  the **Live widget embed code** field in the admin panel. When that field has
+  something in it, the site shows the live feed instead of the grid.
+
+### 💼 LinkedIn — why it's a link, not an auto-feed
+Unlike Spotify, **LinkedIn does not let websites pull your posts automatically**
+(there's no public feed/RSS, and scraping it is against their rules and breaks
+constantly). So the site shows an **"Also on LinkedIn"** card linking to your
+profile. When you post something on LinkedIn worth keeping, add it as a **Blog**
+entry in the admin panel (takes ~30 seconds) — that's the reliable way to
+"reflect" it here.
+
+Set your profile URL in the admin panel under **LinkedIn**.
+
+---
+
 Enjoy your new site! 🌿

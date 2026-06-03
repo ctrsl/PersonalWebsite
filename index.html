@@ -23,6 +23,8 @@
       <li><a class="nav__link" href="#projects">Projects</a></li>
       <li><a class="nav__link" href="#experience">Experience</a></li>
       <li><a class="nav__link" href="#blog">Blog</a></li>
+      <li><a class="nav__link" href="#media">Media</a></li>
+      <li><a class="nav__link" href="#music">Music</a></li>
     </ul>
     <button class="nav__toggle" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -35,11 +37,11 @@
     <span class="blob blob--leaf" style="width:340px;height:340px;top:12%;right:8%;"></span>
     <span class="blob blob--sage" style="width:300px;height:300px;bottom:8%;left:4%;animation-delay:-5s;"></span>
     <div class="container hero__inner">
-      <p class="eyebrow reveal">Designer · Maker · Writer</p>
-      <h1 class="reveal" data-delay="1">Calm, <span class="accent">considered</span> things, grown for the web.</h1>
-      <p class="lead reveal" data-delay="2">I'm Your Name. I design and build digital products with warmth, clarity, and care.</p>
+      <p class="eyebrow reveal">Student - Drummer - Writter</p>
+      <h1 class="reveal" data-delay="1">Hi, I'm <span class="accent">Leif.</span></h1>
+      <p class="lead reveal" data-delay="2">I'm a third year computer scientist at Colorado State University with a passion for creative design, and a love for drumming.</p>
       <div class="hero__actions reveal" data-delay="3">
-        <a href="#projects" class="btn btn--primary">See my work <span class="btn__arrow">→</span></a>
+        <a href="#projects" class="btn btn--primary">See my projects <span class="btn__arrow">→</span></a>
         <a href="#about" class="btn btn--ghost">About me</a>
       </div>
     </div>
@@ -54,10 +56,10 @@
     <div class="container about">
       <div class="reveal">
         <p class="eyebrow">About</p>
-        <h2>A maker at heart.</h2>
-        <p style="margin:18px 0;">Ten years of designing and building things that feel honest and human. I care about typography, the weight of a button, and the quiet moments between interactions.</p>
+        <h2>A creative.</h2>
+        <p style="margin:18px 0;">I've been designing and making things since I was young. Countless Roblox games, full servers and mods on platforms like Minecraft, and many school projects, have shown me so many subtlties about design culture and software.</p>
         <div class="stats">
-          <div><div class="stat__num">10+</div><div class="stat__label">YEARS</div></div>
+          <div><div class="stat__num">10+</div><div class="stat__label">Years tinkering and experimenting</div></div>
           <div><div class="stat__num">40+</div><div class="stat__label">PROJECTS</div></div>
           <div><div class="stat__num">∞</div><div class="stat__label">COFFEE</div></div>
         </div>
@@ -100,6 +102,27 @@
         <h2>Notes & writing</h2>
       </div>
       <div class="grid grid--3" data-render="blog"></div>
+      <div data-render="linkedin"></div>
+    </div>
+  </section>
+
+  <!-- ============ MEDIA / INSTAGRAM ============ -->
+  <section class="section" id="media">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Media</p>
+        <h2>Latest from Instagram</h2>
+      </div>
+      <div data-render="media"></div>
+    </div>
+  </section>
+
+  <!-- ============ SPOTIFY / MUSIC ============ -->
+  <section class="section" id="music" style="background:var(--bg-soft);position:relative;overflow:hidden;">
+    <span class="blob blob--sage" style="width:300px;height:300px;top:-40px;right:-30px;animation-delay:-3s;"></span>
+    <div class="container">
+      <div class="section__head reveal" data-render="music-head"></div>
+      <div class="reveal" data-render="music"></div>
     </div>
   </section>
 

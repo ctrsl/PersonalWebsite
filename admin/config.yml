@@ -81,3 +81,54 @@ collections:
               - { label: "Author", name: "author", widget: "string", required: false, default: "Your Name" }
               - { label: "Short excerpt", name: "excerpt", widget: "text", hint: "One line shown in the list." }
               - { label: "Body", name: "body", widget: "text", hint: "Supports simple Markdown: ## heading, **bold**, *italic*, - lists, > quotes, [link](url)." }
+
+  # ---------- LINKEDIN ----------
+  - name: "linkedin"
+    label: "LinkedIn"
+    files:
+      - name: "linkedin"
+        label: "LinkedIn callout"
+        file: "content/linkedin.json"
+        description: "The 'Also on LinkedIn' card shown under your blog."
+        fields:
+          - { label: "Your LinkedIn profile URL", name: "linkedin_url", widget: "string" }
+          - { label: "Blurb", name: "blurb", widget: "text" }
+
+  # ---------- MEDIA / INSTAGRAM ----------
+  - name: "media"
+    label: "Media (Instagram)"
+    files:
+      - name: "media"
+        label: "Instagram media"
+        file: "content/media.json"
+        description: "The photo grid in the Media section."
+        fields:
+          - { label: "Your Instagram URL", name: "instagram_url", widget: "string" }
+          - label: "Live widget embed code (optional)"
+            name: "embed_code"
+            widget: "text"
+            required: false
+            hint: "Optional. Paste an embed iframe from a service like LightWidget or SnapWidget to show a LIVE feed. Leave blank to use the photo grid below."
+          - label: "Photos"
+            name: "posts"
+            widget: "list"
+            fields:
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Caption", name: "caption", widget: "string", required: false }
+              - { label: "Link (e.g. the Instagram post)", name: "url", widget: "string", required: false }
+
+  # ---------- MUSIC / SPOTIFY ----------
+  - name: "spotify"
+    label: "Music (Spotify)"
+    files:
+      - name: "spotify"
+        label: "Spotify player"
+        file: "content/spotify.json"
+        description: "The Spotify player in the Music section."
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Blurb", name: "blurb", widget: "string", required: false }
+          - label: "Spotify share link"
+            name: "spotify_link"
+            widget: "string"
+            hint: "In Spotify, open a playlist/album/track → ... menu → Share → Copy link, and paste it here."

@@ -414,3 +414,54 @@ p { color: var(--text-mut); }
 .modal__meta { font-size: 0.85rem; color: var(--gold); margin: 4px 0 6px; }
 .modal__title { margin-bottom: 18px; }
 body.modal-open { overflow: hidden; }
+
+/* ============================================================
+   LINKEDIN callout (inside the Blog section)
+   ============================================================ */
+.linkedin-card {
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 24px 28px; margin-top: 40px;
+  transition: transform 0.45s var(--bounce), border-color 0.4s var(--ease);
+}
+.linkedin-card:hover { transform: translateY(-4px); border-color: rgba(140,194,106,0.5); }
+.linkedin-card__icon {
+  flex: none; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center;
+  background: rgba(140,194,106,0.14); color: var(--leaf);
+}
+.linkedin-card__icon svg { width: 26px; height: 26px; }
+.linkedin-card__text { flex: 1 1 280px; }
+.linkedin-card__text strong { color: var(--text); font-size: 1.05rem; }
+.linkedin-card__text p { font-size: 0.92rem; margin-top: 2px; }
+
+/* ============================================================
+   MEDIA / INSTAGRAM grid
+   ============================================================ */
+.media-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 900px) { .media-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.media-tile {
+  position: relative; aspect-ratio: 1; display: block; overflow: hidden;
+  border-radius: 20px; background: var(--surface); border: 1px solid var(--line);
+}
+.media-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+.media-tile:hover img { transform: scale(1.09); }
+.media-tile__cap {
+  position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 16px;
+  color: var(--text); font-size: 0.85rem; line-height: 1.35; opacity: 0;
+  background: linear-gradient(transparent 45%, rgba(8,10,6,0.88));
+  transition: opacity 0.4s var(--ease);
+}
+.media-tile:hover .media-tile__cap { opacity: 1; }
+
+.section-foot { text-align: center; margin-top: 44px; }
+
+/* ============================================================
+   SPOTIFY embed
+   ============================================================ */
+.spotify-wrap { max-width: 720px; margin: 0 auto; }
+.spotify-wrap iframe {
+  width: 100%; border: 0; border-radius: 18px; display: block;
+  box-shadow: 0 30px 60px -34px rgba(0,0,0,0.8);
+}

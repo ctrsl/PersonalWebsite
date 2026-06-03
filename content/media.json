@@ -1,0 +1,14 @@
+{
+  "instagram_url": "https://instagram.com/yourhandle",
+  "embed_code": "",
+  "posts": [
+    { "image": "https://picsum.photos/seed/leaf1/600/600", "caption": "Morning light in the studio", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf2/600/600", "caption": "Field notes & coffee", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf3/600/600", "caption": "A new project takes shape", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf4/600/600", "caption": "Trail day", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf5/600/600", "caption": "Ceramics in progress", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf6/600/600", "caption": "Golden hour", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf7/600/600", "caption": "Workspace reset", "url": "https://instagram.com/yourhandle" },
+    { "image": "https://picsum.photos/seed/leaf8/600/600", "caption": "Sketchbook spread", "url": "https://instagram.com/yourhandle" }
+  ]
+}
